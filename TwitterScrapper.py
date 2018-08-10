@@ -102,8 +102,11 @@ def doSearch(driverPath, url):
 	elems = elems.find_elements_by_tag_name("span")
 	list_of_photos = []
 	for x in elems:
+<<<<<<< HEAD
 		if len(list_of_photos) >= 25:
 			break
+=======
+>>>>>>> 371a922e200332da2c82c15fa505b11bb9597d7e
 		try:
 			x.click()
 			sleep(2)
@@ -115,8 +118,15 @@ def doSearch(driverPath, url):
 		except:
 			pass
 
+<<<<<<< HEAD
 	driver.close()
 	return list_of_photos
+=======
+	for x in list_of_photos:
+		print("listItem ", end=x)
+
+	driver.close()
+>>>>>>> 371a922e200332da2c82c15fa505b11bb9597d7e
 
 def main():
 	if len(sys.argv) != 2:
@@ -159,4 +169,8 @@ if __name__ == '__main__':
 	main()
 #else:
 	#print ('I am being imported from another module')
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> 371a922e200332da2c82c15fa505b11bb9597d7e
