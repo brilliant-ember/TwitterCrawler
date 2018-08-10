@@ -77,15 +77,14 @@ def buildTestURL():
 	url = 'https://twitter.com/search?l=&q=' + url
 	url = url + '&src=typd'
 	return url
-	
-def doSearch(driverPath, url): 
-	# Chrome requires the complete path with the executable
-	driver = webdriver.Chrome(driverPath)
-	# Firefox requires only the directory path to the gecko driver
-	# "D:\soft\Python\python35-ws"
-	#driver = webdriver.Firefox(sys.argv[1])
-	#driver.get("https://twitter.com/search-advanced?lang=en")
 
+def getDriver(driverPath, headless=None):
+	options = webdriver.ChromeOptions()
+	if headless: options.add_argument('headless')
+	driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
+	return driver
+	
+def doSearch(driver, url): 
 	driver.get(url)
 
 	#for the photos
@@ -126,7 +125,9 @@ def main():
 		''')
 		sys.exit(1)
 	url = buildTestURL()
-	doSearch(sys.argv[1], url)
+	driver = getDriver(sys.argv[1])
+	list = doSearch(driver, url)
+	print(list)
 
 def performSeach(driver, keyWordSearchStr, keyWordORSearchStr, excludeSearchStr, hastagSearchStr, locationSearchStr, sinceDateStr, untilDateStr):
 	# Build the search url
@@ -152,6 +153,7 @@ def performSeach(driver, keyWordSearchStr, keyWordORSearchStr, excludeSearchStr,
 	url = 'https://twitter.com/search?l=&q=' + url
 	url = url + '&src=typd'
 	print ("url:" + url)
+	driver = getDriver(driver, "headless")
 	return doSearch(driver, url)
 	
 if __name__ == '__main__':
