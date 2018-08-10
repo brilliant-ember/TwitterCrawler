@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.chrome.options import Options
+
 import time
 import urllib
 import sys
@@ -80,7 +82,9 @@ def buildTestURL():
 
 def getDriver(driverPath, headless=None):
 	options = webdriver.ChromeOptions()
-	if headless: options.add_argument('headless')
+	if headless: 
+		options.add_argument('headless')
+		options.add_argument("--window-size=1920x1080")
 	driver = webdriver.Chrome(executable_path=driverPath, chrome_options=options)
 	return driver
 	
